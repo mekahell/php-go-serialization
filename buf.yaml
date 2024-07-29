@@ -1,0 +1,12 @@
+version: v2
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/envoyproxy/protoc-gen-validate
+modules:
+  - path: proto
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT

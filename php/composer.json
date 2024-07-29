@@ -1,0 +1,33 @@
+{
+    "name": "mekahell/php-go-serialization",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "User\\Service\\V1\\": "src/User/Service/V1",
+            "User\\Service\\V1\\Metadata\\": "src/User/Service/V1/Metadata",
+            "App\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "**/tests/",
+            "**/bin/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "google/gax": "^1.34",
+        "symfony/console": "^7.1",
+        "psr/log": "^3.0",
+        "symfony/http-client": "^7.1",
+        "gsols/validate": "^0.1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.2"
+    },
+    "replace": {
+        "google/protobuf": "*"
+    }
+}

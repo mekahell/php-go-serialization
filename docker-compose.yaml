@@ -1,0 +1,43 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+    - 9090:9090
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+    - cadvisor
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+    - 8080:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    depends_on:
+    - go-api-service
+
+  # php-cli:
+  #   build:
+  #     context: php
+  #   container_name: php-protobuf-cli
+  #   environment:
+  #     - USER_SERVICE_URL=http://go-api-service:8181/users
+  #   depends_on:
+  #     - go-api-service
+
+  go-api-service:
+    build:
+      context: go
+    container_name: go-api-service
+    environment:
+      - LISTEN_ADDR=0.0.0.0:8181
+    ports:
+      - 8181:8181

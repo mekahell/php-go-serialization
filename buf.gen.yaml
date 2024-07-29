@@ -1,0 +1,14 @@
+version: v2
+plugins:
+  - protoc_builtin: php
+    out: php/src
+  - local: protoc-gen-go
+    out: go/internal/proto/go
+    opt: paths=source_relative
+  - local: protoc-gen-validate
+    out: go/internal/proto/go
+    opt:
+      - lang=go
+      - paths=source_relative    
+inputs:
+  - directory: proto

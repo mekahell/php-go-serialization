@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package user.service.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/type/phone_number.proto";
+import "google/type/postal_address.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/mekahell/php-go-serialization/internal/proto/go/user/service/v1;user_service_v1";
+option php_metadata_namespace = "User\\Service\\V1\\Metadata";
+
+message Users {
+  repeated User users = 1;
+}
+
+message User {
+  string first_name = 1;
+  string last_name = 2;
+  string email_address = 3;
+  google.type.PostalAddress postal_address = 4;
+  google.type.PhoneNumber phone_number = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
